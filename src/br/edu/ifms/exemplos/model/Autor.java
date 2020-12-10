@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  * @author gin
  */
 public class Autor implements DAO{
-    private long id;
+    private Long id;
     private String nome;
     private String sobreNome;
     
@@ -30,15 +30,12 @@ public class Autor implements DAO{
     public Autor() throws ClassNotFoundException, SQLException {
         conn = DatabaseUtils.getConnection();
     }
-    
-    
-    
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -57,6 +54,13 @@ public class Autor implements DAO{
     public void setSobreNome(String sobreNome) {
         this.sobreNome = sobreNome;
     }
+    
+    
+    
+
+        
+
+    
 
     @Override
     public Object buscar(long id) {
@@ -73,7 +77,7 @@ public class Autor implements DAO{
             ResultSet rs = ps.executeQuery();
             
             if(rs.next()){
-                a.setId(rs.getInt("id"));
+                a.setId(rs.getLong("id"));
                 a.setNome(rs.getString("nome"));
                 a.setSobreNome(rs.getString("sobrenome"));
                 
@@ -105,7 +109,7 @@ public class Autor implements DAO{
             
             while(rs.next()){
                 Autor a = new Autor();
-                a.setId(rs.getInt("id"));
+                a.setId(rs.getLong("id"));
                 a.setNome(rs.getString("nome"));
                 a.setSobreNome(rs.getString("sobrenome"));
                 
@@ -141,13 +145,14 @@ public class Autor implements DAO{
 
     @Override
     public void atualizar() {
-        String query = "UPDATE livraria.autor SET nome =?, sobrenome =?";
+        String query = "UPDATE livraria.autor SET nome =?, sobrenome =? WHERE id = ?";
         PreparedStatement ps;
         
         try {
             ps = conn.prepareStatement(query);
             ps.setString(1, this.getNome());
             ps.setString(2, this.getSobreNome() );
+            ps.setLong(3, this.getId() );
             
             ps.executeUpdate();      
             

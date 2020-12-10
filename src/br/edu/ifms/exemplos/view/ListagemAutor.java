@@ -5,6 +5,8 @@
  */
 package br.edu.ifms.exemplos.view;
 
+import br.edu.ifms.exemplos.model.Autor;
+import br.edu.ifms.exemplos.model.DAO.AutorAtualizarView;
 import br.edu.ifms.exemplos.model.tableModel.AutorTableModel;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -106,7 +108,23 @@ public class ListagemAutor extends javax.swing.JFrame {
             int lin = tblAutor.getSelectedRow();
             int col = 0;//id (0), nome(1), sobrenome(2)
             
-            System.out.println(model.getValueAt(lin, col));
+            //System.out.println(model.getValueAt(lin, col));
+            Autor a;
+            try {
+                a = new Autor();
+                a = (Autor) a.buscar((long) model.getValueAt(lin, col));
+                
+                System.out.println(a);
+                
+                AutorAtualizarView view = new AutorAtualizarView(a);
+                view.setVisible(true);
+                
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ListagemAutor.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(ListagemAutor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
     }//GEN-LAST:event_tblAutorMouseClicked
 

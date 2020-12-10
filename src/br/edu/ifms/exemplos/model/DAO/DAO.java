@@ -14,6 +14,7 @@ import java.util.Optional;
  */
 public interface DAO<T> {
     T buscar(long id);
+    
     List<T> listar();
     void salvar();
     void atualizar();

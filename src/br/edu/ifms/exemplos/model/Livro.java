@@ -147,13 +147,15 @@ public class Livro implements DAO<Livro>{
 
     @Override
     public void atualizar() {
-        String query = "UPDATE livraria.livro SET nome = ?, id_autor = ?";
+        //remover o campo de chave estrangeira se julgar necessário.
+        String query = "UPDATE livraria.livro SET nome = ?, id_autor = ? WHERE id = ?";
         PreparedStatement ps;
         
         try {
             ps = conn.prepareStatement(query);
             ps.setString(1, this.getNome());
             ps.setLong(2, this.getAutor().getId() );
+            ps.setLong(3, this.getId() );
             
             ps.executeUpdate();      
             

@@ -44,7 +44,7 @@ public class AutorDAO implements DAO2<Autor>{
             ResultSet rs = ps.executeQuery();
             
             if(rs.next()){
-                a.setId(rs.getInt("id"));
+                a.setId(rs.getLong("id"));
                 a.setNome(rs.getString("nome"));
                 a.setSobreNome(rs.getString("sobrenome"));
                 
@@ -75,7 +75,7 @@ public class AutorDAO implements DAO2<Autor>{
             
             while(rs.next()){
                 Autor a = new Autor();
-                a.setId(rs.getInt("id"));
+                a.setId(rs.getLong("id"));
                 a.setNome(rs.getString("nome"));
                 a.setSobreNome(rs.getString("sobrenome"));
                 

@@ -5,7 +5,7 @@
  */
 package br.edu.ifms.exemplos.model.tableModel;
 
-import br.edu.ifms.exemplos.view.DatabaseUtils;
+import br.edu.ifms.exemplos.model.DAO.DatabaseUtils;
 import javax.swing.table.AbstractTableModel;
 import java.sql.*;
 import java.util.logging.Level;
@@ -31,7 +31,7 @@ public class AutorTableModel extends AbstractTableModel{
         this.statement = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         this.connectedToDatabase = true;
         
-        String query = "SELECT * FROM livraria.autor";
+        String query = "SELECT * FROM livraria.autor ORDER BY id ASC";
         setQuery(query);
         
         
