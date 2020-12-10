@@ -5,6 +5,7 @@
  */
 package br.edu.ifms.exemplos.view;
 
+import br.edu.ifms.exemplos.controller.AbstractController;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -18,9 +19,10 @@ import javax.swing.KeyStroke;
  *
  * @author gin
  */
-public class ExemploMenu extends javax.swing.JFrame {
+public class ExemploMenu extends AbstractView {
     private String name = "Cousine";
     private int estilo = Font.PLAIN;
+    private AbstractController controller;
     /**
      * Creates new form ExemploMenu
      */
@@ -37,6 +39,13 @@ public class ExemploMenu extends javax.swing.JFrame {
        chkItalico.addActionListener(t2);
        chkNegrito.addActionListener(t2);
        
+       
+    }
+
+    @Override
+    public void registerController(AbstractController ac) {
+        this.controller = ac;
+        menuCadastroLivro.addActionListener(controller);
     }
     
     private class TratadorFonte implements ActionListener{
@@ -111,7 +120,7 @@ public class ExemploMenu extends javax.swing.JFrame {
         chkNegrito = new javax.swing.JCheckBoxMenuItem();
         chkItalico = new javax.swing.JCheckBoxMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        menuCadastroLivro = new javax.swing.JMenuItem();
 
         Cor.setText("jMenu5");
 
@@ -251,14 +260,14 @@ public class ExemploMenu extends javax.swing.JFrame {
 
         jMenu5.setText("Cadastro");
 
-        jMenuItem2.setMnemonic('l');
-        jMenuItem2.setText("Livros");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        menuCadastroLivro.setMnemonic('l');
+        menuCadastroLivro.setText("Livros");
+        menuCadastroLivro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                menuCadastroLivroActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem2);
+        jMenu5.add(menuCadastroLivro);
 
         jMenuBar1.add(jMenu5);
 
@@ -301,12 +310,12 @@ public class ExemploMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_radCalibriActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        LivroCadastro newWindow = new LivroCadastro();
-        newWindow.setVisible(true);
-        
-        this.setVisible(false);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void menuCadastroLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroLivroActionPerformed
+//        LivroCadastro newWindow = new LivroCadastro();
+//        newWindow.setVisible(true);
+//        
+//        this.setVisible(false);
+    }//GEN-LAST:event_menuCadastroLivroActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
@@ -373,7 +382,6 @@ public class ExemploMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
@@ -381,6 +389,7 @@ public class ExemploMenu extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JLabel lblAmostra;
+    private javax.swing.JMenuItem menuCadastroLivro;
     private javax.swing.JRadioButtonMenuItem radCalibri;
     private javax.swing.JRadioButtonMenuItem radCousine;
     // End of variables declaration//GEN-END:variables

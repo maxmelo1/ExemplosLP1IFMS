@@ -5,6 +5,7 @@
  */
 package br.edu.ifms.exemplos.view;
 
+import br.edu.ifms.exemplos.controller.AbstractController;
 import br.edu.ifms.exemplos.model.Autor;
 import br.edu.ifms.exemplos.model.DAO.AutorDAO;
 import br.edu.ifms.exemplos.model.Livro;
@@ -19,8 +20,8 @@ import javax.swing.JComboBox;
  *
  * @author gin
  */
-public class LivroCadastro extends javax.swing.JFrame {
-
+public class LivroCadastro extends AbstractView {
+    private AbstractController controller;
     /**
      * Creates new form LivroCadastro
      */
@@ -99,6 +100,7 @@ public class LivroCadastro extends javax.swing.JFrame {
         cbAutor = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        btnVoltar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -186,6 +188,9 @@ public class LivroCadastro extends javax.swing.JFrame {
         flowLayout1.setAlignOnBaseline(true);
         jPanel2.setLayout(flowLayout1);
 
+        btnVoltar.setText("Voltar");
+        jPanel2.add(btnVoltar);
+
         jButton1.setText("Cadastrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,7 +214,7 @@ public class LivroCadastro extends javax.swing.JFrame {
             l = new Livro();
             l.setNome(txtNome.getText());
             l.setAutor((Autor) cbAutor.getSelectedItem());
-
+            
             l.salvar();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(LivroCadastro.class.getName()).log(Level.SEVERE, null, ex);
@@ -253,6 +258,7 @@ public class LivroCadastro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<Autor> cbAutor;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -271,4 +277,11 @@ public class LivroCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel lblId;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void registerController(AbstractController ac) {
+        controller = ac;
+        
+        btnVoltar.addActionListener(controller);
+    }
 }
