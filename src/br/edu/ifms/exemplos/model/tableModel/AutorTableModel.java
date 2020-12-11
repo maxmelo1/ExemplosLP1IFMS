@@ -25,13 +25,14 @@ public class AutorTableModel extends AbstractTableModel{
     private int numberOfRows;
     
     private boolean connectedToDatabase = false;
+    
+    private final String query = "SELECT * FROM livraria.autor ORDER BY id ASC";
 
     public AutorTableModel() throws ClassNotFoundException, SQLException {
         this.connection = DatabaseUtils.getConnection();
         this.statement = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         this.connectedToDatabase = true;
         
-        String query = "SELECT * FROM livraria.autor ORDER BY id ASC";
         setQuery(query);
         
         
@@ -51,6 +52,10 @@ public class AutorTableModel extends AbstractTableModel{
         this.numberOfRows = this.resultSet.getRow();
         
         fireTableStructureChanged();
+    }
+    
+    public void update() throws SQLException{
+        setQuery(query);
     }
     
 
